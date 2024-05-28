@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Sardanapal.Ef.Service" Version="0.1.5" />
+    <PackageReference Include="Sardanapal.Identity.Services" Version="0.1.15" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TinyServiceRegistry.Domain\TinyServiceRegistry.Domain.csproj" />
+    <ProjectReference Include="..\TinyServiceRegistry.Share\TinyServiceRegistry.Share.csproj" />
+    <ProjectReference Include="..\TinyServiceRegistry.ViewModel\TinyServiceRegistry.ViewModel.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
