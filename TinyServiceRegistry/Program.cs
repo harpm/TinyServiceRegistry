@@ -21,7 +21,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.Services.SeedUser();
+await app.Services.SeedUser();
 
 app.UseHttpsRedirection();
 

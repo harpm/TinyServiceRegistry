@@ -14,7 +14,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.2" />
-    <PackageReference Include="Sardanapal.Identity.Authorization" Version="0.1.11" />
+    <PackageReference Include="Sardanapal.Identity.Authorization" Version="0.1.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 

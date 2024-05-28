@@ -1,20 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MySql.EntityFrameworkCore.Extensions;
 using Sardanapal.Identity.Authorization.Data;
 using Sardanapal.Identity.Dto;
 using Sardanapal.Identity.Services.Services;
 using Sardanapal.Identity.Services.Services.AccountService;
 using Sardanapal.Identity.Services.Services.UserManager;
-using Sardanapal.Identity.Share;
 using Sardanapal.Identity.ViewModel.Models.Account;
-using System.Text;
 using TinyServiceRegistry.Domain.Data;
 using TinyServiceRegistry.Domain.Entities;
 using TinyServiceRegistry.Service.PanelService;
 using TinyServiceRegistry.Share.Static;
-using static Org.BouncyCastle.Math.EC.ECCurve;
 
 namespace TinyServiceRegistry;
 
