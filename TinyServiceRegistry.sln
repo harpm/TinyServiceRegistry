@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyServiceRegistry.ViewMod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyServiceRegistry", "TinyServiceRegistry\TinyServiceRegistry.csproj", "{0729040A-82A9-4E43-8CD3-4D5E7D5EC9DA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{0E87344B-DE32-45BC-BFA9-CDE7EBF425A9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sardanapal.Identity.Authorization", "..\SardanapalIdentity\Sardanapal.Identity.Authorization\Sardanapal.Identity.Authorization.csproj", "{053D2B4E-055B-47F9-8E7B-9D52618A08AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{0729040A-82A9-4E43-8CD3-4D5E7D5EC9DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0729040A-82A9-4E43-8CD3-4D5E7D5EC9DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0729040A-82A9-4E43-8CD3-4D5E7D5EC9DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053D2B4E-055B-47F9-8E7B-9D52618A08AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053D2B4E-055B-47F9-8E7B-9D52618A08AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053D2B4E-055B-47F9-8E7B-9D52618A08AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053D2B4E-055B-47F9-8E7B-9D52618A08AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -67,7 +67,6 @@ public abstract class _AdminControllerBase<TService, TKey, TVM, TListItem, TSear
     }
 
     [HttpPost("Dictionary")]
-    public async Task<IResponse<GridVM<TKey, SelectOptionVM<TKey, object>, TSearchVM>>> GetDictionary(GridSearchModelVM<TKey, TSearchVM> model)
     {
         return await _service.GetDictionary(model);
     }
