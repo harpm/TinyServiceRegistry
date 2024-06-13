@@ -1,16 +1,16 @@
 ﻿using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Sardanapal.Http.Service.Services;
 using Sardanapal.Identity.Authorization.Data;
-using Sardanapal.Identity.Dto;
 using Sardanapal.Identity.Services.Services;
-using Sardanapal.Identity.Services.Services.AccountService;
 using Sardanapal.Identity.Services.Services.UserManager;
-using Sardanapal.Identity.ViewModel.Models.Account;
+using Sardanapal.Identity.Share.Static;
+using Sardanapal.InterfacePanel.Service;
 using TinyServiceRegistry.Domain.Data;
 using TinyServiceRegistry.Domain.Entities;
+using TinyServiceRegistry.Service;
 using TinyServiceRegistry.Service.PanelService;
-using TinyServiceRegistry.Share.Static;
 
 namespace TinyServiceRegistry;
 
@@ -20,7 +20,7 @@ public static class _StartUp
     {
         configs.CachConfigs();
         services.AddScoped<IIdentityHolder, IdentityHolder>();
-        services.AddSqlServer<TSRUnitOfWork>(CachedConfigs.DbConnectionString
+        services.AddSqlServer<TSRUnitOfWork>(StaticConfigs.DbConnectionString
             , opt =>
         {
             opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
@@ -28,35 +28,29 @@ public static class _StartUp
         });
         services.AddHttpContextAccessor();
         services.AddScoped<ITokenService, TSRTokenService>();
-        services.AddScoped<IUserManagerService<long, TSRUser, TSRRole>, TSRUserManager>(opt =>
-        {
-            var serviceProv = opt.CreateScope().ServiceProvider;
-            return new TSRUserManager(serviceProv.GetRequiredService<TSRUnitOfWork>(), serviceProv.GetRequiredService<ITokenService>(), 0);
-        });
-        services.AddScoped<IAccountServiceBase<long, LoginVM, LoginDto, RegisterVM>, TSRAccountService>(opt =>
-        {
-            var serviceProv = opt.CreateScope().ServiceProvider;
-            return new TSRAccountService(serviceProv.GetRequiredService<TSRUserManager>(), 0);
-        });
+        services.AddScoped<IUserManagerService<long, TSRUser, TSRRole>, TSRAdminUserManager>();
+        services.AddScoped<IRequestService, RequestService>();
+
+        services.InjectTSRServices();
 
         return services;
     }
 
     public static void CachConfigs(this IConfiguration configs)
     {
-        CachedConfigs.DbConnectionString = configs.GetConnectionString("SqlDb");
+        StaticConfigs.DbConnectionString = configs.GetConnectionString("SqlDb");
 
-        CachedConfigs.RedisConnectionString = configs.GetConnectionString("Redis");
+        StaticConfigs.RedisConnectionString = configs.GetConnectionString("Redis");
         var TokenProvider = configs.GetSection("TokenProvider");
         string secretKeyStr = TokenProvider.GetValue<string>("SecretKey");
         var SymmetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKeyStr));
-        CachedConfigs.TokenParameters = new TokenValidationParameters()
+        StaticConfigs.TokenParameters = new TokenValidationParameters()
         {
             ValidIssuer = TokenProvider.GetSection("Issuer").Value,
             ValidAudience = TokenProvider.GetSection("Audience").Value,
             IssuerSigningKey = SymmetricKey
         };
-        CachedConfigs.ExpirationTime = Convert.ToInt32(TokenProvider.GetSection("TokenExpireTime").Value);
-        CachedConfigs.OTPLength = Convert.ToInt32(TokenProvider.GetSection("OtpLength").Value);
+        StaticConfigs.ExpirationTime = Convert.ToInt32(TokenProvider.GetSection("TokenExpireTime").Value);
+        StaticConfigs.OTPLength = Convert.ToInt32(TokenProvider.GetSection("OtpLength").Value);
     }
 }

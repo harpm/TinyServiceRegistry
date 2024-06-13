@@ -21,12 +21,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+await app.Services.SeedRoles();
 await app.Services.SeedUser();
 
 app.UseHttpsRedirection();
+app.UseSardanapalAuthentication();
 
 app.MapControllers();
 
-app.UseSardanapalAuthentication();
 
 app.Run();

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyServiceRegistry.Share",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyServiceRegistry.ViewModel", "TinyServiceRegistry.ViewModel\TinyServiceRegistry.ViewModel.csproj", "{EA4422AB-82B2-47CC-9DA9-A8647129BDFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TinyServiceRegistry", "TinyServiceRegistry\TinyServiceRegistry.csproj", "{0729040A-82A9-4E43-8CD3-4D5E7D5EC9DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TinyServiceRegistry", "TinyServiceRegistry\TinyServiceRegistry.csproj", "{0729040A-82A9-4E43-8CD3-4D5E7D5EC9DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,5 +42,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76CB4FB5-DF7D-47A8-B739-EB992C4D284D}
 	EndGlobalSection
 EndGlobal

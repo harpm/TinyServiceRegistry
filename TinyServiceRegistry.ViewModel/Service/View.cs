@@ -13,4 +13,5 @@ public class ServiceListItemDto : BaseListItem<int>
 {
     public string Name { get; set; }
     public string Description { get; set; }
+    public string Instances { get; set; }
 }
