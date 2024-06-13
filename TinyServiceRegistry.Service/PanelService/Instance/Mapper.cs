@@ -1,5 +1,7 @@
 ﻿
 using AutoMapper;
+using Sardanapal.ViewModel.Models;
+using System.Xml.Linq;
 using TinyServiceRegistry.Domain.Entities;
 using TinyServiceRegistry.ViewModel.ServiceInstance;
 
@@ -21,5 +23,9 @@ public class ServiceInstanceMapper : Profile
             .IncludeBase<NewServiceInstanceVM, ServiceInstance>();
 
         CreateMap<ServiceInstance, RoundRobinServiceInstanceDto>();
+
+        CreateMap<ServiceInstance, SelectOptionVM<int, object>>()
+            .ForMember(x => x.Key, q => q.MapFrom(w => w.Id))
+            .ForMember(x => x.Value, q => q.MapFrom(w => new { IP = w.IP, Port = w.Port }));
     }
 }

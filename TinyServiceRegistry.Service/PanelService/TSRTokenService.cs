@@ -14,6 +14,27 @@ public class TSRTokenService : TokenService
         
     }
 
+    public IResponse<string> GenerateTokenForServices<TUserKey>(TUserKey uid, byte roleId)
+    {
+        TUserKey uid2 = uid;
+        IResponse<string> result = new Response<string>("TokenService", OperationType.Function);
+        return result.Fill(() =>
+        {
+            SigningCredentials signingCredentials = new SigningCredentials(StaticConfigs.TokenParameters.IssuerSigningKey, "HS256");
+            Claim[] claims = new Claim[2]
+            {
+                    new Claim(ClaimTypes.NameIdentifier, uid2.ToString()),
+                    new Claim(ClaimTypes.Role, roleId.ToString())
+            };
+            string validIssuer = StaticConfigs.TokenParameters.ValidIssuer;
+            string validAudience = StaticConfigs.TokenParameters.ValidAudience;
+            DateTime? expires = DateTime.UtcNow.AddMinutes(1200);
+            SigningCredentials signingCredentials2 = signingCredentials;
+            JwtSecurityToken token = new JwtSecurityToken(validIssuer, validAudience, claims, null, expires, signingCredentials2);
+            result.Set(StatusCode.Succeeded, new JwtSecurityTokenHandler().WriteToken(token));
+        });
+    }
+
     public IResponse<string> GenerateToken<TUserKey>(TUserKey uid, byte roleId)
     {
         TUserKey uid2 = uid;
