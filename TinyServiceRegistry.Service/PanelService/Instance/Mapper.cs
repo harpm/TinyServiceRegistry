@@ -16,7 +16,10 @@ public class ServiceInstanceMapper : Profile
         CreateMap<ServiceInstance, ServiceInstanceEditableVM>();
         CreateMap<NewServiceInstanceVM, ServiceInstance>()
             .ForMember(m => m.IsActive, q => q.MapFrom(w => true));
+
         CreateMap<ServiceInstanceEditableVM, ServiceInstance>()
             .IncludeBase<NewServiceInstanceVM, ServiceInstance>();
+
+        CreateMap<ServiceInstance, RoundRobinServiceInstanceDto>();
     }
 }

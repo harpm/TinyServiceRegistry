@@ -8,7 +8,7 @@ public static class Seed
 {
     public static async Task SeedRoles(this IServiceProvider serviceProvider)
     {
-        var scope = serviceProvider.CreateScope();
+        using var scope = serviceProvider.CreateScope();
 
         var uow = scope.ServiceProvider.GetRequiredService<TSRUnitOfWork>();
 
@@ -33,7 +33,7 @@ public static class Seed
 
     public static async Task SeedUser(this IServiceProvider serviceProvider)
     {
-        var scope = serviceProvider.CreateScope();
+        using var scope = serviceProvider.CreateScope();
 
         var uow = scope.ServiceProvider.GetRequiredService<TSRUnitOfWork>();
 
@@ -55,16 +55,16 @@ public static class Seed
             await uow.SaveChangesAsync();
         }
 
-        var tur = await uow.UserRoles.AsNoTracking()
-            .Where(x => x.UserId == admin.Id && x.RoleId == (byte)TSRRoleType.Admin)
-            .FirstOrDefaultAsync();
+        var roles = await uow.Roles.AsNoTracking()
+            .Where(x => !x.UserRoles.Where(u => u.UserId == admin.Id).Any())
+            .ToListAsync();
 
-        if (tur == null)
+        foreach (var role in roles)
         {
-            tur = new TSRUserRole()
+            var tur = new TSRUserRole()
             {
                 UserId = admin.Id,
-                RoleId = (byte)TSRRoleType.Admin
+                RoleId = role.Id
             };
 
             await uow.AddAsync(tur);

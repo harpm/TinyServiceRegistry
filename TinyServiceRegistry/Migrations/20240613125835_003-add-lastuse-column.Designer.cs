@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TinyServiceRegistry.Domain.Data;
 
@@ -11,9 +12,11 @@ using TinyServiceRegistry.Domain.Data;
 namespace TinyServiceRegistry.Migrations
 {
     [DbContext(typeof(TSRUnitOfWork))]
-    partial class TSRUnitOfWorkModelSnapshot : ModelSnapshot
+    [Migration("20240613125835_003-add-lastuse-column")]
+    partial class _003addlastusecolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -13,6 +13,7 @@ public class ServiceInstance : BaseEntityModel<int>
     public int Port { get; set; }
     public int ServiceId { get; set; }
     public bool IsActive { get; set; }
+    public bool LastUse { get; set; }
 
     [ForeignKey(nameof(ServiceId))]
     public Service RelatedService { get; set; }

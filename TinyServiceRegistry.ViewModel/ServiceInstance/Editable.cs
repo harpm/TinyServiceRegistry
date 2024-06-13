@@ -6,9 +6,6 @@ namespace TinyServiceRegistry.ViewModel.ServiceInstance;
 public class NewServiceInstanceVM
 {
     [Required]
-    public string Name { get; set; }
-
-    [Required]
     public int ServiceId { get; set; }
 
     [Required]

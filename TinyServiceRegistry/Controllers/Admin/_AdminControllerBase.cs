@@ -12,7 +12,9 @@ public abstract class _AdminControllerBase : ControllerBase
 
 }
 
-public abstract class _AdminControllerBase<TService, TKey, TVM, TListItem, TSearchVM, TNewVM, TEditableVM> : _AdminControllerBase
+[Area("Admin")]
+[Route("[area]/[controller]")]
+public abstract class _AdminControllerBase<TService, TKey, TVM, TListItem, TSearchVM, TNewVM, TEditableVM> : _ServiceControllerBase
     where TService : class, IPanelService<TKey, TSearchVM, TVM, TNewVM, TEditableVM>
     where TKey : IEquatable<TKey>, IComparable<TKey>
     where TListItem : BaseListItem<TKey>, new()
@@ -67,6 +69,7 @@ public abstract class _AdminControllerBase<TService, TKey, TVM, TListItem, TSear
     }
 
     [HttpPost("Dictionary")]
+    public async Task<IResponse<GridVM<TKey, SelectOptionVM<TKey, object>, TSearchVM>>> GetDictionary(GridSearchModelVM<TKey, TSearchVM> model)
     {
         return await _service.GetDictionary(model);
     }
