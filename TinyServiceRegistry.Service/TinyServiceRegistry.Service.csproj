@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="Sardanapal.Ef.Service" Version="0.1.5" />
-    <PackageReference Include="Sardanapal.Identity.Services" Version="0.1.15" />
+    <PackageReference Include="Sardanapal.Ef.Service" Version="0.1.6" />
+    <PackageReference Include="Sardanapal.Identity.Services" Version="0.1.17" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,14 +1,14 @@
 ﻿using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Sardanapal.Http.Service.Services;
 using Sardanapal.Identity.Authorization.Data;
-using Sardanapal.Identity.Dto;
 using Sardanapal.Identity.Services.Services;
-using Sardanapal.Identity.Services.Services.AccountService;
 using Sardanapal.Identity.Services.Services.UserManager;
-using Sardanapal.Identity.ViewModel.Models.Account;
+using Sardanapal.InterfacePanel.Service;
 using TinyServiceRegistry.Domain.Data;
 using TinyServiceRegistry.Domain.Entities;
+using TinyServiceRegistry.Service;
 using TinyServiceRegistry.Service.PanelService;
 using TinyServiceRegistry.Share.Static;
 
@@ -28,16 +28,10 @@ public static class _StartUp
         });
         services.AddHttpContextAccessor();
         services.AddScoped<ITokenService, TSRTokenService>();
-        services.AddScoped<IUserManagerService<long, TSRUser, TSRRole>, TSRUserManager>(opt =>
-        {
-            var serviceProv = opt.CreateScope().ServiceProvider;
-            return new TSRUserManager(serviceProv.GetRequiredService<TSRUnitOfWork>(), serviceProv.GetRequiredService<ITokenService>(), 0);
-        });
-        services.AddScoped<IAccountServiceBase<long, LoginVM, LoginDto, RegisterVM>, TSRAccountService>(opt =>
-        {
-            var serviceProv = opt.CreateScope().ServiceProvider;
-            return new TSRAccountService(serviceProv.GetRequiredService<TSRUserManager>(), 0);
-        });
+        services.AddScoped<IUserManagerService<long, TSRUser, TSRRole>, TSRAdminUserManager>();
+        services.AddScoped<IRequestService, RequestService>();
+
+        services.InjectTSRServices();
 
         return services;
     }
