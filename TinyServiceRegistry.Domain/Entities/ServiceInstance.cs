@@ -1,4 +1,6 @@
 ﻿
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Sardanapal.Domain;
 using Sardanapal.Domain.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,4 +19,13 @@ public class ServiceInstance : BaseEntityModel<int>
 
     [ForeignKey(nameof(ServiceId))]
     public Service RelatedService { get; set; }
+}
+
+public class ServiceInstanceConfig : FluentModelConfig<ServiceInstance>
+{
+    public override void OnModelBuild(EntityTypeBuilder<ServiceInstance> entity)
+    {
+        entity.HasIndex(x => new { x.IP, x.Port })
+            .IsUnique();
+    }
 }

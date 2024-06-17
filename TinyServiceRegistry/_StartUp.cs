@@ -24,7 +24,7 @@ public static class _StartUp
             , opt =>
         {
             opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
-            opt.MigrationsAssembly("TinyServiceRegistry");
+            opt.MigrationsAssembly("TinyServiceRegistry.Domain");
         });
         services.AddHttpContextAccessor();
         services.AddScoped<ITokenService, TSRTokenService>();
